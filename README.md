@@ -1,4 +1,4 @@
-# react-dayjs-picker
+# react-dayjs-picker [WIP]
 
 > Simple date picker and calendar made for React and Day.js
 
