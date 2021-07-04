@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 import { ViewType } from './types'
 import ItemButton from './ItemButton'
+import styles from '../styles.module.css'
 
 interface YearViewProps {
   startingYear: number
@@ -10,6 +11,7 @@ interface YearViewProps {
   setViewedDate: (date: Dayjs) => void
   setView: (view: ViewType) => void
   disableBeforeToday?: boolean
+  markToday?: boolean
 }
 
 const YearView: FC<YearViewProps> = ({
@@ -17,7 +19,8 @@ const YearView: FC<YearViewProps> = ({
   viewedDate,
   setViewedDate,
   setView,
-  disableBeforeToday
+  disableBeforeToday,
+  markToday
 }) => {
   const today = dayjs()
   const years = Array.from(new Array(12), (_, i) => i + startingYear)
@@ -28,13 +31,13 @@ const YearView: FC<YearViewProps> = ({
   }
 
   return (
-    <div className='rdp-year-view'>
+    <div className={styles['rdp-year-view']}>
       {years.map((year) => (
         <ItemButton
           key={`year-${year}`}
           onClick={onSelect(year)}
           className='max-height'
-          highlighted={year === today.year()}
+          highlighted={markToday && year === today.year()}
           disabled={disableBeforeToday && year < today.year()}
         >
           {year}

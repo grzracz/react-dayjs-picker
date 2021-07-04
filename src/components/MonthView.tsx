@@ -3,6 +3,7 @@ import dayjs, { Dayjs } from 'dayjs'
 import ItemButton from './ItemButton'
 import { MONTHS } from './consts'
 import { ViewType } from './types'
+import styles from '../styles.module.css'
 
 interface MonthViewProps {
   disableBeforeToday?: boolean
@@ -10,13 +11,15 @@ interface MonthViewProps {
   viewedDate: Dayjs
   setViewedDate: (date: Dayjs) => void
   setView: (view: ViewType) => void
+  markToday?: boolean
 }
 
 const MonthView: FC<MonthViewProps> = ({
   viewedDate,
   setViewedDate,
   setView,
-  disableBeforeToday
+  disableBeforeToday,
+  markToday
 }) => {
   const today = dayjs()
   const isCurrentYear = viewedDate.year() === today.year()
@@ -27,16 +30,17 @@ const MonthView: FC<MonthViewProps> = ({
   }
 
   return (
-    <div className='rdp-month-view'>
+    <div className={styles['rdp-month-view']}>
       {MONTHS.map((month, index) => (
         <ItemButton
           key={`month-${index}`}
           onClick={onSelect(index)}
           className='max-height'
-          highlighted={isCurrentYear && today.month() === index}
+          highlighted={markToday && isCurrentYear && today.month() === index}
           disabled={
-            (disableBeforeToday && viewedDate.year() < today.year()) ||
-            (isCurrentYear && index < today.month())
+            disableBeforeToday &&
+            (viewedDate.year() < today.year() ||
+              (isCurrentYear && index < today.month()))
           }
         >
           {month}

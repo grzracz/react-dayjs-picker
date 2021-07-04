@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import styles from '../styles.module.css'
 
 interface ItemButtonProps {
   onClick?: () => void
@@ -17,15 +18,15 @@ const ItemButton: FC<ItemButtonProps> = ({
   highlighted
 }) => {
   const getClass = (additionalClassnames?: string) => {
-    let classes = 'item-button'
+    let classes = `${styles['rdp-item-button']} `
     if (disabled) {
-      classes += ' disabled'
+      classes += styles.disabled
     } else if (active) {
-      classes += ' active'
+      classes += styles.active
     } else if (highlighted) {
-      classes += ' highlighted'
+      classes += styles.highlighted
     } else {
-      classes += ' default'
+      classes += styles.default
     }
     if (additionalClassnames) {
       classes += ` ${additionalClassnames}`

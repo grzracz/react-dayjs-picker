@@ -3,6 +3,7 @@ import dayjs, { Dayjs } from 'dayjs'
 import arraySupport from 'dayjs/plugin/arraySupport'
 import ItemButton from './ItemButton'
 import { WEEKDAYS } from './consts'
+import styles from '../styles.module.css'
 dayjs.extend(arraySupport)
 
 interface DayViewProps {
@@ -10,13 +11,15 @@ interface DayViewProps {
   selected?: Dayjs
   viewedDate: Dayjs
   onSelect?: (date: Dayjs) => void
+  markToday?: boolean
 }
 
 const DayView: FC<DayViewProps> = ({
   disableBeforeToday,
   selected,
   viewedDate,
-  onSelect
+  onSelect,
+  markToday
 }) => {
   const startingDay = (viewedDate.startOf('month').day() + 6) % 7
   const today = dayjs().startOf('day')
@@ -42,11 +45,11 @@ const DayView: FC<DayViewProps> = ({
   }
 
   return (
-    <div className='rdp-day-view'>
+    <div className={styles['rdp-day-view']}>
       {WEEKDAYS.map((weekday, index) => (
-        <span key={`weekday-${index}`} className='rdp-weekday'>
+        <div key={`weekday-${index}`} className={styles['rdp-weekday']}>
           {weekday}
-        </span>
+        </div>
       ))}
       {Array(startingDay)
         .fill(0)
@@ -57,7 +60,7 @@ const DayView: FC<DayViewProps> = ({
         <ItemButton
           key={`month-${viewedDate.month()}-day-${day}`}
           onClick={onClick(index)}
-          highlighted={isCurrentMonth && day === today.date()}
+          highlighted={markToday && isCurrentMonth && day === today.date()}
           active={isSelectedMonth && day === selected?.date()}
           disabled={
             disableBeforeToday &&
