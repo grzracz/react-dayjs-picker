@@ -2,12 +2,11 @@ import React, { FC, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 import DayView from './DayView'
 import { Carousel } from 'react-responsive-carousel'
-import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import MonthView from './MonthView'
 import YearView from './YearView'
 import { ViewType } from './types'
 import styles from '../styles.module.css'
-
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 interface CalendarProps {
   selected?: Dayjs

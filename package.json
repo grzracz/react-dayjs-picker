@@ -25,9 +25,9 @@
   },
   "peerDependencies": {
     "react": "^16.0.0",
-    "dayjs": "^1.10.5",
-    "react-tiny-popover": "^6.0.5",
-    "react-responsive-carousel": "^3.2.19"
+    "dayjs": "^1.0.0",
+    "react-tiny-popover": "^6.0.0",
+    "react-responsive-carousel": "^3.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -58,7 +58,10 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "dayjs": "^1.10.5",
+    "react-tiny-popover": "^6.0.5",
+    "react-responsive-carousel": "^3.2.19"
   },
   "files": [
     "dist"

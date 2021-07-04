@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import Popover from 'react-tiny-popover'
+import { Popover } from 'react-tiny-popover'
 import Calendar from './Calendar'
 import { Dayjs } from 'dayjs'
 
@@ -42,7 +42,7 @@ const DatePicker: FC<DatePickerProps> = ({
   return (
     <Popover
       onClickOutside={closePopover}
-      isOpen={isOpen}
+      isOpen={!!isOpen}
       padding={0}
       positions={['bottom']}
       containerClassName='z-50'
