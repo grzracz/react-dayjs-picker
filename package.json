@@ -24,7 +24,10 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": "^16.0.0",
+    "dayjs": "^1.10.5",
+    "react-tiny-popover": "^6.0.5",
+    "react-responsive-carousel": "^3.2.19"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
