@@ -11,6 +11,16 @@
   "engines": {
     "node": ">=13"
   },
+  "keywords": [
+    "react",
+    "dayjs",
+    "datepicker",
+    "calendar",
+    "date",
+    "picker",
+    "datetime"
+  ],
+  "homepage": "https://grzracz.github.io/react-dayjs-picker/",
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
