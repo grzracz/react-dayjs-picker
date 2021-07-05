@@ -1,38 +1,20 @@
 /* item button */
 .rdp-item-button {
   display: flex;
-  border: 1px solid #ACACAC;
+  border: 1px solid #acacac;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
   user-select: none;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 0 #0000, 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 0 #0000, 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  transition: opacity .15s;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 0 #0000,
+    0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 0 #0000, 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: opacity 0.15s, background-color 0.15s;
   border-radius: 0.1rem;
 }
 
 .rdp-item-button:hover {
   opacity: 0.6;
-}
-
-.rdp-item-button.default {
-  background-color: white;
-}
-
-.rdp-item-button.active {
-  background-color: blue;
-}
-
-.rdp-item-button.highlighted {
-  background-color: lightgreen;
-}
-
-.rdp-item-button.disabled {
-  background-color: lightgray;
-  color: gray;
-  cursor: not-allowed;
 }
 
 .rdp-item-button.max-height {
@@ -60,7 +42,7 @@
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 0.25rem;
-  height: 12rem;
+  height: 13rem;
   text-align: center;
 }
 
@@ -98,7 +80,7 @@
   color: #505050;
   background-color: white;
   border: 1px solid #909090;
-  transition: opacity .15s;
+  transition: opacity 0.15s;
   cursor: pointer;
   border-radius: 0.15rem;
 }
@@ -120,8 +102,7 @@
 }
 
 .rdp-navbar-date {
-  transition: background-color .15s;
-  background-color: white;
+  transition: background-color 0.15s;
   padding: 0.1rem 0.25rem;
 }
 
@@ -130,12 +111,12 @@
 }
 
 .rdp-navbar-date.clickable:hover {
-  background-color: #ECECEC;
+  background-color: #ececec;
 }
 
 /* date picker */
 .rdp-date-picker-content {
   background-color: white;
   padding: 0.4rem;
-  border: 1px solid gray;
+  border: 1px solid #909090;
 }

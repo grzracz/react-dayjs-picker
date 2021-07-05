@@ -1,43 +1,53 @@
 import React, { FC } from 'react'
 import styles from '../styles.module.css'
+import { ColorComponentsType } from './types'
 
 interface ItemButtonProps {
   onClick?: () => void
-  className?: string
   highlighted?: boolean
   active?: boolean
   disabled?: boolean
+  colors?: ColorComponentsType
+  className?: string
 }
 
 const ItemButton: FC<ItemButtonProps> = ({
   children,
-  className,
   disabled,
   onClick,
   active,
-  highlighted
+  highlighted,
+  colors,
+  className
 }) => {
-  const getClass = (additionalClassnames?: string) => {
-    let classes = `${styles['rdp-item-button']} `
+  const getStyle = () => {
+    const style = {
+      backgroundColor: 'white',
+      color: 'black',
+      cursor: 'pointer'
+    }
     if (disabled) {
-      classes += styles.disabled
+      style.backgroundColor = colors?.disabled ? colors.disabled : 'lightgray'
+      style.color = 'gray'
+      style.cursor = 'not-allowed'
     } else if (active) {
-      classes += styles.active
+      style.backgroundColor = colors?.active ? colors.active : 'royalblue'
+      style.color = 'white'
     } else if (highlighted) {
-      classes += styles.highlighted
-    } else {
-      classes += styles.default
+      style.backgroundColor = colors?.highlighted
+        ? colors.highlighted
+        : 'lightgreen'
     }
-    if (additionalClassnames) {
-      classes += ` ${additionalClassnames}`
-    }
-    return classes
+    return style
   }
 
   return (
     <div
       onClick={disabled ? undefined : onClick}
-      className={getClass(className)}
+      className={`${styles['rdp-item-button']}${
+        className ? ` ${className}` : ''
+      }`}
+      style={getStyle()}
     >
       {children}
     </div>
