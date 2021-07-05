@@ -4,27 +4,33 @@ import DayView from './DayView'
 import { Carousel } from 'react-responsive-carousel'
 import MonthView from './MonthView'
 import YearView from './YearView'
-import { ViewType } from './types'
+import { ColorComponentsType, RenderComponentsType, ViewType } from './types'
 import styles from '../styles.module.css'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
-interface CalendarProps {
-  selected?: Dayjs
+export interface CalendarProps {
+  date?: Dayjs
   onSelect?: (date: Dayjs) => void
   disableBeforeToday?: boolean
   markToday?: boolean
+  disableDates?: (day: Dayjs) => boolean
+  render?: RenderComponentsType
+  colors?: ColorComponentsType
+  transitionTime?: number
 }
 
 const Calendar: FC<CalendarProps> = ({
-  selected,
+  date,
   onSelect,
   disableBeforeToday,
-  markToday
+  markToday,
+  disableDates,
+  render,
+  transitionTime,
+  colors
 }) => {
   const [view, setView] = useState<ViewType>(2)
-  const [viewedDate, setViewedDate] = useState(
-    selected || dayjs().startOf('month')
-  )
+  const [viewedDate, setViewedDate] = useState(date || dayjs().startOf('month'))
   const startingYear = viewedDate.year() - (viewedDate.year() % 10)
 
   const resetDate = () => {
@@ -80,33 +86,51 @@ const Calendar: FC<CalendarProps> = ({
           </div>
         </div>
         <div className={styles[`rdp-navbar-buttons`]}>
-          <button
-            className={`${styles[`rdp-navbar-button`]}${
-              view === 1 ? ` ${styles.disabled}` : ''
-            }`}
-            onClick={view === 0 ? decreaseDecade : decreaseMonth}
-            disabled={view === 1}
-          >
-            {'<'}
-          </button>
-          <button
-            className={`${styles[`rdp-navbar-button`]}${
-              view === 1 ? ` ${styles.disabled}` : ''
-            }`}
-            color='secondary'
-            onClick={resetDate}
-          >
-            ↻
-          </button>
-          <button
-            className={`${styles[`rdp-navbar-button`]}${
-              view === 1 ? ` ${styles.disabled}` : ''
-            }`}
-            onClick={view === 0 ? increaseDecade : increaseMonth}
-            disabled={view === 1}
-          >
-            {'>'}
-          </button>
+          {render?.prevButton ? (
+            render.prevButton(
+              view === 0 ? decreaseDecade : decreaseMonth,
+              view === 1
+            )
+          ) : (
+            <button
+              className={`${styles[`rdp-navbar-button`]}${
+                view === 1 ? ` ${styles.disabled}` : ''
+              }`}
+              onClick={view === 0 ? decreaseDecade : decreaseMonth}
+              disabled={view === 1}
+            >
+              {'<'}
+            </button>
+          )}
+          {render?.refreshButton ? (
+            render.refreshButton(resetDate, view === 1)
+          ) : (
+            <button
+              className={`${styles[`rdp-navbar-button`]}${
+                view === 1 ? ` ${styles.disabled}` : ''
+              }`}
+              onClick={resetDate}
+              disabled={view === 1}
+            >
+              ↻
+            </button>
+          )}
+          {render?.nextButton ? (
+            render.nextButton(
+              view === 0 ? increaseDecade : increaseMonth,
+              view === 1
+            )
+          ) : (
+            <button
+              className={`${styles[`rdp-navbar-button`]}${
+                view === 1 ? ` ${styles.disabled}` : ''
+              }`}
+              onClick={view === 0 ? increaseDecade : increaseMonth}
+              disabled={view === 1}
+            >
+              {'>'}
+            </button>
+          )}
         </div>
       </div>
       <Carousel
@@ -118,31 +142,39 @@ const Calendar: FC<CalendarProps> = ({
         useKeyboardArrows={false}
         swipeable={false}
         emulateTouch={false}
-        transitionTime={150}
+        transitionTime={transitionTime || 150}
       >
         <YearView
           disableBeforeToday={disableBeforeToday}
           startingYear={startingYear}
-          selected={selected}
+          selected={date}
           viewedDate={viewedDate}
           setViewedDate={setViewedDate}
           setView={setView}
           markToday={markToday}
+          renderItem={render?.yearItem}
+          colors={colors}
         />
         <MonthView
           disableBeforeToday={disableBeforeToday}
-          selected={selected}
+          selected={date}
           viewedDate={viewedDate}
           setViewedDate={setViewedDate}
           setView={setView}
           markToday={markToday}
+          renderItem={render?.monthItem}
+          colors={colors}
         />
         <DayView
           disableBeforeToday={disableBeforeToday}
-          selected={selected}
+          selected={date}
           viewedDate={viewedDate}
           onSelect={onSelect}
           markToday={markToday}
+          disableDates={disableDates}
+          renderWeekday={render?.weekdayLabel}
+          renderItem={render?.dayItem}
+          colors={colors}
         />
       </Carousel>
     </div>

@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
-
-import { Calendar, DatePicker } from 'react-dayjs-picker'
-import 'react-dayjs-picker/dist/index.css'
+import React from 'react'
+import Header from './components/Header'
+import DatePickerDemo from './components/DatePickerDemo'
+import InstallationGuide from './components/InstallationGuide'
+import Documentation from './components/Documentation'
 
 const App = () => {
-  const [open, setOpen] = useState(false);
-  return <div>
-    <Calendar />
-    <DatePicker isOpen={open} setIsOpen={setOpen} />
-  </div>
+  return (
+    <div className='w-full pb-20'>
+      <Header />
+      <DatePickerDemo />
+      <InstallationGuide />
+      <Documentation />
+    </div>
+  )
 }
 
 export default App
