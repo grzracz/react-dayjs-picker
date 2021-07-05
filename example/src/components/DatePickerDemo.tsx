@@ -29,8 +29,8 @@ const DatePickerDemo = () => {
       )
 
   return (
-    <div className='flex flex-col w-full sm:flex-row justify-center items-center sm:items-start px-4 py-8 gap-24'>
-      <div className='pb-60 sm:pb-0'>
+    <div className='flex flex-col w-full sm:flex-row justify-center items-center sm:items-start px-4 py-8 gap-20'>
+      <div className='pb-56 sm:pb-0'>
         <DatePicker
           date={date}
           placeholder={'Select date...'}
