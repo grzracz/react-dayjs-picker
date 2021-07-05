@@ -6,7 +6,7 @@
 
 ## Demo/Documentation
 
-[Demo and API docs are available here!]()
+[Demo and API docs are available here!](https://grzracz.github.io/react-dayjs-picker/)
 
 
 ## Install
