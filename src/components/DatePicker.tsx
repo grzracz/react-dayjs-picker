@@ -7,7 +7,6 @@ import styles from '../styles.module.css'
 interface DatePickerProps extends CalendarProps {
   isOpen?: boolean
   setIsOpen?: (isOpen: boolean) => void
-  onSelect?: (day?: Dayjs) => void
   value?: string
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
   closeOnSelect?: boolean

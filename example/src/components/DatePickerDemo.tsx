@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { DatePicker } from 'react-dayjs-picker'
 import { Dayjs } from 'dayjs'
-import { CaretLeftOutlined, CaretRightOutlined, ReloadOutlined } from '@ant-design/icons'
+import { LeftOutlined, ReloadOutlined, RightOutlined } from '@ant-design/icons'
 
 const DatePickerDemo = () => {
   const [open, setOpen] = useState(false)
@@ -16,14 +16,20 @@ const DatePickerDemo = () => {
   const [customPosition, setCustomPosition] = useState(false)
   const [customComponents, setCustomComponents] = useState(false)
 
-  const renderButton = (children: React.ReactNode) => (onClick: () => void, disabled: boolean) => (
-    <button onClick={onClick} disabled={disabled} className="border flex justify-center items-center p-1 shadow hover:bg-gray-100">
-      {children}
-    </button>
-  )
+  const renderButton =
+    (children: React.ReactNode) => (onClick: () => void, disabled: boolean) =>
+      (
+        <button
+          onClick={onClick}
+          disabled={disabled}
+          className='border flex justify-center items-center p-1 shadow hover:bg-gray-100'
+        >
+          {children}
+        </button>
+      )
 
   return (
-    <div className='flex flex-col w-full sm:flex-row justify-center items-center sm:items-start p-4 gap-8'>
+    <div className='flex flex-col w-full sm:flex-row justify-center items-center sm:items-start px-4 py-8 gap-8'>
       <div className='pb-60 sm:pb-0'>
         <DatePicker
           date={date}
@@ -36,12 +42,22 @@ const DatePickerDemo = () => {
           disableBeforeToday={disableBeforeToday}
           markToday={markToday}
           format={customFormat ? 'D MMMM YYYY' : undefined}
-          disableDates={disableCustomDates ? (day: Dayjs) => {return day.day() === 0} : undefined}
-          render={customComponents ? {
-              prevButton: renderButton(<CaretLeftOutlined />),
-              refreshButton: renderButton(<ReloadOutlined />),
-              nextButton: renderButton(<CaretRightOutlined />),
-          } : undefined}
+          disableDates={
+            disableCustomDates
+              ? (day: Dayjs) => {
+                  return day.day() === 0
+                }
+              : undefined
+          }
+          render={
+            customComponents
+              ? {
+                  prevButton: renderButton(<LeftOutlined />),
+                  refreshButton: renderButton(<ReloadOutlined />),
+                  nextButton: renderButton(<RightOutlined />)
+                }
+              : undefined
+          }
         />
       </div>
       <div className='flex flex-col gap-2'>

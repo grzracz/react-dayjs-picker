@@ -1,8 +1,13 @@
-# react-dayjs-picker [WIP]
+# react-dayjs-picker
 
 > Simple date picker and calendar made for React and Day.js
 
-[![NPM](https://img.shields.io/npm/v/react-dayjs-picker.svg)](https://www.npmjs.com/package/react-dayjs-picker) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![NPM](https://img.shields.io/npm/l/react-dayjs-picker)](https://www.npmjs.com/package/react-dayjs-picker)
+[![NPM](https://img.shields.io/npm/v/react-dayjs-picker.svg)](https://www.npmjs.com/package/react-dayjs-picker) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![License](https://img.shields.io/npm/l/react-dayjs-picker)](https://www.npmjs.com/package/react-dayjs-picker)
+
+## Demo/Documentation
+
+[Demo and API docs are available here!]()
+
 
 ## Install
 
