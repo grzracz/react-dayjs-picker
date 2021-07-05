@@ -1,6 +1,6 @@
 {
   "name": "react-dayjs-picker",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Simple date picker and calendar made for React and Day.js",
   "author": "grzracz",
   "license": "MIT",
