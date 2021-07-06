@@ -1,4 +1,5 @@
 import React from 'react'
+import ShieldImage from './ShieldImage'
 
 const Header = () => {
   return (
@@ -19,33 +20,23 @@ const Header = () => {
         Simple date picker and calendar made for React and Day.js
       </div>
       <div className='flex gap-2 justify-center p-2'>
-        <a
-          href='https://www.npmjs.com/package/react-dayjs-picker'
-          target='__blank'
-        >
-          <img
-            src='https://img.shields.io/npm/v/react-dayjs-picker.svg'
-            alt='npm package version'
-          />
-        </a>
-        <a
+        <ShieldImage
+          href={'https://www.npmjs.com/package/react-dayjs-picker'}
+          src={'https://img.shields.io/npm/v/react-dayjs-picker.svg'}
+          alt='npm package version'
+        />
+        <ShieldImage
+          href={'https://github.com/grzracz/react-dayjs-picker'}
+          src={
+            'https://img.shields.io/github/stars/grzracz/react-dayjs-picker?style=social'
+          }
+          alt='github stars'
+        />
+        <ShieldImage
           href='https://github.com/grzracz/react-dayjs-picker'
-          target='__blank'
-        >
-          <img
-            src='https://img.shields.io/github/stars/grzracz/react-dayjs-picker?style=social'
-            alt='github stars'
-          />
-        </a>
-        <a
-          href='https://github.com/grzracz/react-dayjs-picker'
-          target='__blank'
-        >
-          <img
-            src='https://img.shields.io/npm/l/react-dayjs-picker'
-            alt='MIT license'
-          />
-        </a>
+          src='https://img.shields.io/npm/l/react-dayjs-picker'
+          alt='MIT license'
+        />
       </div>
     </div>
   )
