@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { DatePicker } from '../dist'
 import { Dayjs } from 'dayjs'
+import { DatePicker } from 'react-dayjs-picker'
 import { LeftOutlined, ReloadOutlined, RightOutlined } from '@ant-design/icons'
 import CheckboxInput from './CheckboxInput'
 
@@ -42,6 +42,7 @@ const DatePickerDemo = () => {
           closeOnSelect={closeOnSelect}
           disableBeforeToday={disableBeforeToday}
           markToday={markToday}
+          onChange={() => console.log}
           format={customFormat ? 'D MMMM YYYY' : undefined}
           disableDates={
             disableCustomDates
@@ -69,10 +70,16 @@ const DatePickerDemo = () => {
         <CheckboxInput checked={markToday} updateChecked={setMarkToday}>
           mark today
         </CheckboxInput>
-        <CheckboxInput checked={disableBeforeToday} updateChecked={setDisableBeforeToday}>
+        <CheckboxInput
+          checked={disableBeforeToday}
+          updateChecked={setDisableBeforeToday}
+        >
           disable dates before today
         </CheckboxInput>
-        <CheckboxInput checked={disableCustomDates} updateChecked={setDisableCustomDates}>
+        <CheckboxInput
+          checked={disableCustomDates}
+          updateChecked={setDisableCustomDates}
+        >
           disable custom dates
         </CheckboxInput>
         <CheckboxInput checked={closeOnSelect} updateChecked={setCloseOnSelect}>
@@ -81,10 +88,16 @@ const DatePickerDemo = () => {
         <CheckboxInput checked={customFormat} updateChecked={setCustomFormat}>
           custom date format
         </CheckboxInput>
-        <CheckboxInput checked={customPosition} updateChecked={setCustomPosition}>
+        <CheckboxInput
+          checked={customPosition}
+          updateChecked={setCustomPosition}
+        >
           custom position
         </CheckboxInput>
-        <CheckboxInput checked={customComponents} updateChecked={setCustomComponents}>
+        <CheckboxInput
+          checked={customComponents}
+          updateChecked={setCustomComponents}
+        >
           render custom components
         </CheckboxInput>
         <div>...and more</div>

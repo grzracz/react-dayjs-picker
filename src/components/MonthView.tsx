@@ -35,7 +35,7 @@ const MonthView: FC<MonthViewProps> = ({
   }
 
   const isActive = (index: number): boolean => {
-    return isCurrentYear && index === selected?.date()
+    return selected?.year() === viewedDate.year() && index === selected?.month()
   }
 
   const isHighlighted = (index: number): boolean => {

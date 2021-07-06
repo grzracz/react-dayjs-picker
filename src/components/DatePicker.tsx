@@ -15,6 +15,8 @@ interface DatePickerProps extends CalendarProps {
   format?: string
   popoverPositions?: ('left' | 'right' | 'top' | 'bottom')[]
   renderInput?: () => React.ReactNode
+  inputStyle?: React.CSSProperties
+  inputClassName?: string
 }
 
 const DatePicker: FC<DatePickerProps> = (props) => {
@@ -66,6 +68,8 @@ const DatePicker: FC<DatePickerProps> = (props) => {
             placeholder={props.placeholder}
             onChange={props.onChange}
             onFocus={openPopover}
+            style={props.inputStyle}
+            className={props.inputClassName}
           />
         )}
       </div>

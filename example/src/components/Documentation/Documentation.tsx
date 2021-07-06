@@ -1,4 +1,177 @@
 import React from 'react'
+import PropRow from './PropRow'
+
+const CALENDAR_PROPS = [
+  {
+    name: 'date',
+    type: 'Dayjs',
+    description: 'Selected date in Dayjs format'
+  },
+  {
+    name: 'onSelect',
+    type: '(date: Dayjs) => void',
+    description: 'Function callback executed when a date is selected'
+  },
+  {
+    name: 'disableBeforeToday',
+    type: 'boolean',
+    description:
+      'Whether to prevent user from selecting days before today (True) or not (False)'
+  },
+  {
+    name: 'markToday',
+    type: 'boolean',
+    description: 'Whether to highlight today (True) or not (False)'
+  },
+  {
+    name: 'disableDates',
+    type: '(day: Dayjs) => boolean',
+    description:
+      'Function that dictates which days are disabled (return True) from selection'
+  },
+  {
+    name: 'transitionTime',
+    type: 'number',
+    description:
+      'Number of milliseconds the animation takes to switch a view (default: 150ms)'
+  },
+  {
+    name: 'style',
+    type: 'React.CSSProperties',
+    description:
+      'React inline styles object passed to top level div of Calendar'
+  },
+  {
+    name: 'className',
+    type: 'string',
+    description: 'CSS class names passed to top level div of Calendar'
+  },
+  {
+    name: 'render',
+    type: 'object',
+    description:
+      'Object with functions to replace particular Calendar components.',
+    attributes: [
+      {
+        name: 'prevButton',
+        type: '(onClick: () => void, disabled: boolean) => React.ReactNode'
+      },
+      {
+        name: 'refreshButton',
+        type: '(onClick: () => void, disabled: boolean) => React.ReactNode'
+      },
+      {
+        name: 'nextButton',
+        type: '(onClick: () => void, disabled: boolean) => React.ReactNode'
+      },
+      {
+        name: 'weekdayLabel',
+        type: '(day: typeof WEEKDAYS[number]) => React.ReactNode'
+      },
+      {
+        name: 'dayItem',
+        type: '(value: number, onClick: () => void, active: boolean, highlighted: boolean, disabled: boolean) => React.ReactNode'
+      },
+      {
+        name: 'monthItem',
+        type: '(value: number, onClick: () => void, active: boolean, highlighted: boolean, disabled: boolean) => React.ReactNode'
+      },
+      {
+        name: 'yearItem',
+        type: '(value: number, onClick: () => void, active: boolean, highlighted: boolean, disabled: boolean) => React.ReactNode'
+      }
+    ]
+  },
+  {
+    name: 'colors',
+    type: 'object',
+    description:
+      'Object with color strings to replace default Calendar colors.',
+    attributes: [
+      {
+        name: 'active',
+        type: 'string'
+      },
+      {
+        name: 'highlighted',
+        type: 'string'
+      },
+      {
+        name: 'disabled',
+        type: 'string'
+      },
+      {
+        name: 'default',
+        type: 'string'
+      }
+    ]
+  }
+]
+
+const DATE_PICKER_PROPS = [
+  {
+    name: 'isOpen',
+    type: 'boolean',
+    description: 'Whether Calendar popover is visible (True) or not (False)'
+  },
+  {
+    name: 'setIsOpen',
+    type: '(isOpen: boolean) => void',
+    description:
+      'Function executed when changes in visibility occur (on select or on click outside)'
+  },
+  {
+    name: 'value',
+    type: 'string',
+    description: 'Value inside DatePicker input (has priority over date)'
+  },
+  {
+    name: 'onChange',
+    type: '(event: ChangeEvent<HTMLInputElement>) => void',
+    description: 'Function executed when input value is modified by user'
+  },
+  {
+    name: 'closeOnSelect',
+    type: 'boolean',
+    description: 'Whether to close popover on date select (True) or not (False)'
+  },
+  {
+    name: 'placeholder',
+    type: 'string',
+    description: 'Input placeholder'
+  },
+  {
+    name: 'zIndex',
+    type: 'number',
+    description:
+      'Z-index given to the popover (prevents issues with other high z-index components)'
+  },
+  {
+    name: 'format',
+    type: 'string',
+    description: 'Custom Day.js date render format'
+  },
+  {
+    name: 'popoverPositions',
+    type: "('left' | 'right' | 'top' | 'bottom')[]",
+    description: 'Popover positions table sorted from most to least desirable'
+  },
+  {
+    name: 'renderInput',
+    type: '() => React.ReactNode',
+    description: 'Function to replace input component'
+  },
+  {
+    name: 'inputStyle',
+    type: 'React.CSSProperties',
+    description: 'React inline styles object passed to input'
+  },
+  {
+    name: 'inputClassName',
+    type: 'string',
+    description: 'CSS class names passed to input'
+  }
+]
 
 const Documentation = () => {
   return (
@@ -13,153 +186,9 @@ const Documentation = () => {
             <div className='text-sm text-gray-600 pb-4'>
               All props are optional
             </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>date</div>
-                <code>Dayjs</code>
-              </div>
-              <div className='text-sm'>Selected date in Dayjs format</div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>onSelect</div>
-                <code>{`(date: Dayjs) => void`}</code>
-              </div>
-              <div className='text-sm'>
-                Function callback executed when a date is selected
-              </div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>disableBeforeToday</div>
-                <code>boolean</code>
-              </div>
-              <div className='text-sm'>
-                Whether to prevent user from selecting days before today (True)
-                or not (False)
-              </div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>markToday</div>
-                <code>boolean</code>
-              </div>
-              <div className='text-sm'>
-                Whether to highlight today (True) or not (False)
-              </div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>disableDates</div>
-                <code>{`(day: Dayjs) => boolean`}</code>
-              </div>
-              <div className='text-sm'>
-                Function that dictates which days are disabled (return True)
-                from selection
-              </div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>transitionTime</div>
-                <code>{`number`}</code>
-              </div>
-              <div className='text-sm'>
-                Number of milliseconds the animation takes to switch a view
-                (default: 150ms)
-              </div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>render</div>
-                <code>object</code>
-              </div>
-              <div className='text-sm'>
-                Object with functions to replace particular Calendar components.
-                <br />
-                Available object attributes:
-                <div className='py-2 px-4 border'>
-                  <div className='py-2'>
-                    <div className='flex flex-col justify-between'>
-                      <div className='font-bold'>prevButton</div>
-                      <code className='text-right'>{`(onClick: () => void, disabled: boolean) => React.ReactNode`}</code>
-                    </div>
-                  </div>
-                  <div className='py-2'>
-                    <div className='flex flex-col justify-between'>
-                      <div className='font-bold'>refreshButton</div>
-                      <code className='text-right'>{`(onClick: () => void, disabled: boolean) => React.ReactNode`}</code>
-                    </div>
-                  </div>
-                  <div className='py-2'>
-                    <div className='flex flex-col justify-between'>
-                      <div className='font-bold'>nextButton</div>
-                      <code className='text-right'>{`(onClick: () => void, disabled: boolean) => React.ReactNode`}</code>
-                    </div>
-                  </div>
-                  <div className='py-2'>
-                    <div className='flex flex-col justify-between'>
-                      <div className='font-bold'>weekdayLabel</div>
-                      <code className='text-right'>{`(day: typeof WEEKDAYS[number]) => React.ReactNode`}</code>
-                    </div>
-                  </div>
-                  <div className='py-2'>
-                    <div className='flex flex-col justify-between'>
-                      <div className='font-bold'>dayItem</div>
-                      <code className='text-right'>{`(value: number, onClick: () => void, active: boolean, highlighted: boolean, disabled: boolean) => React.ReactNode`}</code>
-                    </div>
-                  </div>
-                  <div className='py-2'>
-                    <div className='flex flex-col justify-between'>
-                      <div className='font-bold'>monthItem</div>
-                      <code className='text-right'>{`(value: number, onClick: () => void, active: boolean, highlighted: boolean, disabled: boolean) => React.ReactNode`}</code>
-                    </div>
-                  </div>
-                  <div className='py-2'>
-                    <div className='flex flex-col justify-between'>
-                      <div className='font-bold'>yearItem</div>
-                      <code className='text-right'>{`(value: number, onClick: () => void, active: boolean, highlighted: boolean, disabled: boolean) => React.ReactNode`}</code>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>colors</div>
-                <code>object</code>
-              </div>
-              <div className='text-sm'>
-                Object with color strings to replace default Calendar colors.
-                <br />
-                Available object attributes:
-                <div className='py-2 px-4 border'>
-                  <div className='py-2'>
-                    <div className='flex justify-between'>
-                      <div className='font-bold'>active</div>
-                      <code className='text-right'>{`string`}</code>
-                    </div>
-                  </div>
-                  <div className='py-2'>
-                    <div className='flex justify-between'>
-                      <div className='font-bold'>highlighted</div>
-                      <code className='text-right'>{`string`}</code>
-                    </div>
-                  </div>
-                  <div className='py-2'>
-                    <div className='flex justify-between'>
-                      <div className='font-bold'>disabled</div>
-                      <code className='text-right'>{`string`}</code>
-                    </div>
-                  </div>
-                  <div className='py-2'>
-                    <div className='flex justify-between'>
-                      <div className='font-bold'>default</div>
-                      <code className='text-right'>{`string`}</code>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {CALENDAR_PROPS.map((prop, index) => (
+              <PropRow key={`${prop.name}-${index}`} {...prop} />
+            ))}
           </div>
           <div className='p-2 border shadow'>
             <div className='text-xl font-bold'>DatePicker props</div>
@@ -167,92 +196,9 @@ const Documentation = () => {
               DatePicker extends Calendar - all Calendar props apply to
               DatePicker as well
             </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>isOpen</div>
-                <code>boolean</code>
-              </div>
-              <div className='text-sm'>
-                Whether Calendar is visible (True) or not (False)
-              </div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>setIsOpen</div>
-                <code>{`(isOpen: boolean) => void`}</code>
-              </div>
-              <div className='text-sm'>
-                Function executed when changes in visibility occur (on select or
-                on click outside)
-              </div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>value</div>
-                <code>string</code>
-              </div>
-              <div className='text-sm'>
-                Value inside DatePicker input (has priority over date)
-              </div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>onChange</div>
-                <code>{`(event: ChangeEvent<HTMLInputElement>) => void`}</code>
-              </div>
-              <div className='text-sm'>
-                Function executed when input value changes
-              </div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>closeOnSelect</div>
-                <code>boolean</code>
-              </div>
-              <div className='text-sm'>
-                Whether to close popover on date select (True) or not (False)
-              </div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>placeholder</div>
-                <code>string</code>
-              </div>
-              <div className='text-sm'>Input placeholder</div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>zIndex</div>
-                <code>number</code>
-              </div>
-              <div className='text-sm'>
-                Z-index given to the popover (prevents issues with other high
-                z-index components)
-              </div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>format</div>
-                <code>string</code>
-              </div>
-              <div className='text-sm'>Custom Dayjs date render format</div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>popoverPositions</div>
-                <code>{`('left' | 'right' | 'top' | 'bottom')[]`}</code>
-              </div>
-              <div className='text-sm'>
-                Popover positions from most to least desirable
-              </div>
-            </div>
-            <div className='py-2'>
-              <div className='flex justify-between'>
-                <div className='font-bold'>renderInput</div>
-                <code>{`() => React.ReactNode`}</code>
-              </div>
-              <div className='text-sm'>Function to replace input component</div>
-            </div>
+            {DATE_PICKER_PROPS.map((prop, index) => (
+              <PropRow key={`${prop.name}-${index}`} {...prop} />
+            ))}
           </div>
         </div>
       </div>

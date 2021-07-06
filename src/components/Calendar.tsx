@@ -17,6 +17,8 @@ export interface CalendarProps {
   render?: RenderComponentsType
   colors?: ColorComponentsType
   transitionTime?: number
+  style?: React.CSSProperties
+  className?: string
 }
 
 const Calendar: FC<CalendarProps> = ({
@@ -27,7 +29,9 @@ const Calendar: FC<CalendarProps> = ({
   disableDates,
   render,
   transitionTime,
-  colors
+  colors,
+  style,
+  className
 }) => {
   const [view, setView] = useState<ViewType>(2)
   const [viewedDate, setViewedDate] = useState(date || dayjs().startOf('month'))
@@ -63,7 +67,10 @@ const Calendar: FC<CalendarProps> = ({
   }
 
   return (
-    <div className={styles['rdp-calendar']}>
+    <div
+      className={`${styles['rdp-calendar']}${className ? ` ${className}` : ''}`}
+      style={style}
+    >
       <div className={styles['rdp-navbar']}>
         <div className={styles['rdp-navbar-dates']}>
           {view === 2 && (

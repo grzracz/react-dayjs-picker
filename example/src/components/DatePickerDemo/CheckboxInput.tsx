@@ -15,7 +15,9 @@ const CheckboxInput: FC<CheckboxInputProps> = ({
       <input
         type='checkbox'
         checked={checked}
-        onClick={() => (updateChecked ? updateChecked(!checked) : {})}
+        onChange={(event) =>
+          updateChecked ? updateChecked(event.target.checked) : {}
+        }
       />{' '}
       {children}
     </div>
