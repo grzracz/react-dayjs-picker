@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { DatePicker } from 'react-dayjs-picker'
+import { DatePicker } from '../dist'
 import { Dayjs } from 'dayjs'
 import { LeftOutlined, ReloadOutlined, RightOutlined } from '@ant-design/icons'
+import CheckboxInput from './CheckboxInput'
 
 const DatePickerDemo = () => {
   const [open, setOpen] = useState(false)
@@ -62,70 +63,30 @@ const DatePickerDemo = () => {
       </div>
       <div className='flex flex-col gap-2'>
         <div className='text-md font-bold'>Options:</div>
-        <div className='flex items-center gap-2'>
-          <input
-            type='checkbox'
-            checked={stayOpen}
-            onClick={() => setStayOpen(!stayOpen)}
-          />{' '}
+        <CheckboxInput checked={stayOpen} updateChecked={setStayOpen}>
           stay open
-        </div>
-        <div className='flex items-center gap-2'>
-          <input
-            type='checkbox'
-            checked={markToday}
-            onClick={() => setMarkToday(!markToday)}
-          />{' '}
+        </CheckboxInput>
+        <CheckboxInput checked={markToday} updateChecked={setMarkToday}>
           mark today
-        </div>
-        <div className='flex items-center gap-2'>
-          <input
-            type='checkbox'
-            checked={disableBeforeToday}
-            onClick={() => setDisableBeforeToday(!disableBeforeToday)}
-          />{' '}
+        </CheckboxInput>
+        <CheckboxInput checked={disableBeforeToday} updateChecked={setDisableBeforeToday}>
           disable dates before today
-        </div>
-        <div className='flex items-center gap-2'>
-          <input
-            type='checkbox'
-            checked={disableCustomDates}
-            onClick={() => setDisableCustomDates(!disableCustomDates)}
-          />{' '}
+        </CheckboxInput>
+        <CheckboxInput checked={disableCustomDates} updateChecked={setDisableCustomDates}>
           disable custom dates
-        </div>
-        <div className='flex items-center gap-2'>
-          <input
-            type='checkbox'
-            checked={closeOnSelect}
-            onClick={() => setCloseOnSelect(!closeOnSelect)}
-          />{' '}
+        </CheckboxInput>
+        <CheckboxInput checked={closeOnSelect} updateChecked={setCloseOnSelect}>
           close on select
-        </div>
-        <div className='flex items-center gap-2'>
-          <input
-            type='checkbox'
-            checked={customFormat}
-            onClick={() => setCustomFormat(!customFormat)}
-          />{' '}
+        </CheckboxInput>
+        <CheckboxInput checked={customFormat} updateChecked={setCustomFormat}>
           custom date format
-        </div>
-        <div className='flex items-center gap-2'>
-          <input
-            type='checkbox'
-            checked={customPosition}
-            onClick={() => setCustomPosition(!customPosition)}
-          />{' '}
+        </CheckboxInput>
+        <CheckboxInput checked={customPosition} updateChecked={setCustomPosition}>
           custom position
-        </div>
-        <div className='flex items-center gap-2'>
-          <input
-            type='checkbox'
-            checked={customComponents}
-            onClick={() => setCustomComponents(!customComponents)}
-          />{' '}
+        </CheckboxInput>
+        <CheckboxInput checked={customComponents} updateChecked={setCustomComponents}>
           render custom components
-        </div>
+        </CheckboxInput>
         <div>...and more</div>
       </div>
     </div>
